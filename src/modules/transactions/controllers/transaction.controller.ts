@@ -18,11 +18,11 @@ export class TransactionController {
     return this.transactionService.getTransactions(filterDto);
   }
 
-//   @UseGuards(JwtAuthGuard)
-//   @Post('create')
-//   @ApiOperation({ summary: 'Create a transaction (transfer, deposit, withdrawal)' })
-//   @ApiResponse({ status: 201, description: 'Transaction created successfully' })
-//   async createTransaction(@Body() createTransactionDto: CreateTransactionDto) {
-//     return this.transactionService.createTransaction(createTransactionDto);
-//   }
+  @UseGuards(JwtAuthGuard)
+  @Post('create')
+  @ApiOperation({ summary: 'Create a transaction (transfer, deposit, withdrawal)' })
+  @ApiResponse({ status: 201, description: 'Transaction created successfully' })
+  async createTransaction(@Body() createTransactionDto: CreateTransactionDto) {
+    return this.transactionService.createTransaction(createTransactionDto);
+  }
 }

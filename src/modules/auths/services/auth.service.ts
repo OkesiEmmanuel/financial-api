@@ -2,7 +2,7 @@ import { Injectable, BadRequestException, UnauthorizedException, InternalServerE
 import { AuthRepository } from '../repositories/auth.repository';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { RegisterDto, LoginDto } from '../dtos/auth.dto';
+import { RegisterDto, LoginDto, ResetPasswordDto } from '../dtos/auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -53,8 +53,8 @@ export class AuthService {
     return await this.authRepo.findUserById(payload.userId);
   }
 
-  async resetPassword(userId: string, newPassword: string): Promise<{ message: string }> {
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
+  async resetPassword(userId: string, resetPasswordDto: ResetPasswordDto) {
+    const hashedPassword = await bcrypt.hash(resetPasswordDto.newPassword, 10);
     try {
       const user = await this.authRepo.updateUserPassword(userId, hashedPassword);
       return { message: 'Password updated successfully' };

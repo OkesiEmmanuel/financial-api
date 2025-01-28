@@ -1,6 +1,11 @@
-import { IsUUID, IsNumber, Min, IsOptional } from 'class-validator';
+import { IsUUID, IsNumber, Min, IsOptional, IsEnum, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
+enum TransferType {
+  DEPOSIT = 'DEPOSIT',
+  WITHDRAWAL = 'WITHDRAWAL',
+  TRANSFER = 'TRANSFER',
+}
 export class TransactionFilterDto {
   @ApiProperty({ example: 'uuid-of-account', description: 'Filter by account ID', required: false })
   @IsUUID()
@@ -40,5 +45,8 @@ export class CreateTransactionDto {
   amount: number;
 
   @ApiProperty({ example: 'TRANSFER', description: 'Transaction type (DEPOSIT, WITHDRAWAL, TRANSFER)' })
-  type: 'DEPOSIT' | 'WITHDRAWAL' | 'TRANSFER';
+  
+  @IsEnum(TransferType)
+  @IsNotEmpty()
+  type: TransferType;
 }

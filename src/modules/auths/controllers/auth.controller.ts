@@ -1,6 +1,6 @@
 import { Controller, Post, Body, HttpCode, HttpStatus, Param, Put } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
-import { RegisterDto, LoginDto } from '../dtos/auth.dto';
+import { RegisterDto, LoginDto, ResetPasswordDto } from '../dtos/auth.dto';
 import { ApiTags, ApiResponse, ApiOperation } from '@nestjs/swagger';
 import { BadRequestException, UnauthorizedException, InternalServerErrorException } from '@nestjs/common';
 
@@ -59,10 +59,10 @@ export class AuthController {
   @ApiResponse({ status: 500, description: 'Internal server error during password reset' })
   async resetPassword(
     @Param('userId') userId: string,
-    @Body() { newPassword }: { newPassword: string },
-  ): Promise<{ message: string }> {
+    @Body() resetPasswordDto:ResetPasswordDto,
+  ) {
     try {
-      return await this.authService.resetPassword(userId, newPassword);
+      return await this.authService.resetPassword(userId, resetPasswordDto);
     } catch (error) {
       throw new InternalServerErrorException('Error during password reset');
     }

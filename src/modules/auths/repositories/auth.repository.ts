@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { IAuthRepository } from '../interfaces/auth.interface';
 import { PrismaService } from 'src/infrastructure/prisma/prisma.service';
 import { User } from '../entities/auth.entity';
+import { ResetPasswordDto } from '../dtos/auth.dto';
 
 
 @Injectable()
@@ -44,6 +45,15 @@ export class AuthRepository implements IAuthRepository {
         password: newHashedPassword,
       },
     });
+  }
+
+  async resetPassword( 
+    userId: string,
+    resetPasswordDto: ResetPasswordDto
+  ): Promise<User | null>{
+    return this.updateUserPassword(
+      userId,
+      resetPasswordDto.newPassword);
   }
 
   async deleteUser(userId: string): Promise<void> {

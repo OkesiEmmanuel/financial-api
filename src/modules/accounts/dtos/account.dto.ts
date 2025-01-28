@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsUUID, IsNumber, Min } from 'class-validator';
+import { IsNotEmpty, IsUUID, IsNumber, Min, IsString, MinLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateAccountDto {
@@ -47,3 +47,4 @@ export class TransferDto {
   @Min(1)
   amount: number;
 }
+
