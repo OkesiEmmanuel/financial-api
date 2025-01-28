@@ -45,25 +45,47 @@ export class TransactionRepository implements ITransactionRepository {
     return { data, total };
   }
 
-  // Create a new transaction
-  async createTransaction(fromId: string, toId: string | null, amount: number, type: string): Promise<Transaction> {
-    const transaction = await this.prisma.transaction.create({
-      data: {
-        fromId,
-        toId,
-        amount,
-        type,
-      },
+// Create a new transaction
+async createTransaction(fromId: string, toId: string | null, amount: number, type: string): Promise<Transaction> {
+  // Ensure the `fromId` exists in the Account table (not User)
+  const fromAccount = await this.prisma.account.findUnique({
+    where: { id: fromId },
+  });
+
+  if (!fromAccount) {
+    throw new Error('From account does not exist.');
+  }
+
+  // If `toId` is provided, ensure it exists in the Account table
+  if (toId) {
+    const toAccount = await this.prisma.account.findUnique({
+      where: { id: toId },
     });
 
-    // Map Prisma result to Transaction entity
-    return {
-      id: transaction.id,
-      fromId: transaction.fromId,
-      toId: transaction.toId ?? undefined,
-      amount: transaction.amount,
-      type: transaction.type as 'DEPOSIT' | 'WITHDRAWAL' | 'TRANSFER',
-      createdAt: transaction.createdAt,
-    };
+    if (!toAccount) {
+      throw new Error('To account does not exist.');
+    }
   }
+
+  // Proceed with creating the transaction
+  const transaction = await this.prisma.transaction.create({
+    data: {
+      fromId,
+      toId,
+      amount,
+      type,
+    },
+  });
+
+  // Map Prisma result to Transaction entity
+  return {
+    id: transaction.id,
+    fromId: transaction.fromId,
+    toId: transaction.toId ?? undefined,
+    amount: transaction.amount,
+    type: transaction.type as 'DEPOSIT' | 'WITHDRAWAL' | 'TRANSFER',
+    createdAt: transaction.createdAt,
+  };
+}
+
 }
