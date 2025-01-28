@@ -56,7 +56,7 @@ async createTransaction(fromId: string, toId: string | null, amount: number, typ
     throw new Error('From account does not exist.');
   }
 
-  // If `toId` is provided, ensure it exists in the Account table
+ 
   if (toId) {
     const toAccount = await this.prisma.account.findUnique({
       where: { id: toId },
