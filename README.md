@@ -46,9 +46,6 @@ $ git clone https://github.com/OkesiEmmanuel/financial-api.git
 $ cd financial-api
 
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Project setup
 
@@ -81,7 +78,10 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-
+## API Documentation using swagger
+```bash
+$ http://localhost:3000/api/docs
+```
 ## Deployment
 
 When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
