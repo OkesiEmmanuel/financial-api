@@ -19,8 +19,32 @@
     <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
   <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+
+## Description
+
+A simple financial app api that is scalable, maintainable and and writing in clean architecture with SOLID principles and best practices in mind. 
+
+Built by **Okesi Emmanuel Akamasa**, a Fullstack/Mobile Software Engineer.
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Running the Project](#running-the-project)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Resources](#resources)
+- [Support](#support)
+- [License](#license)
+- [Stay in Touch](#stay-in-touch)
+
+## Installation
+
+Clone the repository to your local machine:
+
+```bash
+$ git clone https://github.com/OkesiEmmanuel/financial-api.git
+$ cd financial-api
+
 
 ## Description
 
