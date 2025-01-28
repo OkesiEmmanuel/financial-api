@@ -47,7 +47,7 @@ export class TransactionRepository implements ITransactionRepository {
 
 // Create a new transaction
 async createTransaction(fromId: string, toId: string | null, amount: number, type: string): Promise<Transaction> {
-  // Ensure the `fromId` exists in the Account table (not User)
+ 
   const fromAccount = await this.prisma.account.findUnique({
     where: { id: fromId },
   });
